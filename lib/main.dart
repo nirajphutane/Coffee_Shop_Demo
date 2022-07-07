@@ -15,11 +15,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => WelcomeScreen(),
-        '/coffee_menus': (context) => CoffeeListScreen(),
-      },
+      home: WelcomeScreen(),
     );
   }
 }

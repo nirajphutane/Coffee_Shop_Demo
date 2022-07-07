@@ -13,7 +13,7 @@ class CoffeeList {
 
   List<Coffee> list(){
     return [
-      Coffee(name: 'Caramel Macchiato',             image: 'assets/images/coffee_images/1_Caramel_Macchiato.png',             price: 20),
+      // Coffee(name: 'Caramel Macchiato',             image: 'assets/images/coffee_images/1_Caramel_Macchiato.png',             price: 20),
       Coffee(name: 'Caramel Cold Drink',            image: 'assets/images/coffee_images/2_Caramel_Cold_Drink.png',            price: 30),
       Coffee(name: 'Iced Coffee Mocha',             image: 'assets/images/coffee_images/3_Iced_Coffee_Mocha.png',             price: 50),
       Coffee(name: 'Caramelized Pecan Latte',       image: 'assets/images/coffee_images/4_Caramelized_Pecan_Latte.png',       price: 70),

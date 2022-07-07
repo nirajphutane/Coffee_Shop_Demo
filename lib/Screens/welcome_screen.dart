@@ -10,7 +10,7 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
 
-  int initPosition = 1;
+  int initPosition = 0;
   List<Coffee> coffeeList = [];
 
   @override
@@ -27,12 +27,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             if(details.primaryDelta! < -10){
               Navigator.of(context).push(
                 PageRouteBuilder(
-                  reverseTransitionDuration: Duration(milliseconds: 100),
-                  transitionDuration: Duration(milliseconds: 300),
+                  reverseTransitionDuration: Duration(milliseconds: 75),
+                  transitionDuration: Duration(milliseconds: 650),
                   pageBuilder: (context, animation, secondaryAnimation){
                     return FadeTransition(
                       opacity: animation,
-                      child: CoffeeListScreen(),
+                      child: CoffeeListScreen(initialPage: initPosition+2),
                     );
                   }
                 )
