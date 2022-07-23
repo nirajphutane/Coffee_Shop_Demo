@@ -12,6 +12,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   int initPosition = 0;
   List<Coffee> coffeeList = [];
+  double hide = 1;
 
   @override
   void initState() {
@@ -23,20 +24,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: GestureDetector(
-          onVerticalDragUpdate: (details){
+          onVerticalDragUpdate: (details) async {
             if(details.primaryDelta! < -10){
-              Navigator.of(context).push(
+              setState(() {
+                hide = 0;
+              });
+              await Navigator.of(context).push(
                 PageRouteBuilder(
-                  reverseTransitionDuration: Duration(milliseconds: 75),
+                  reverseTransitionDuration: Duration(milliseconds: 300),
                   transitionDuration: Duration(milliseconds: 650),
                   pageBuilder: (context, animation, secondaryAnimation){
                     return FadeTransition(
                       opacity: animation,
-                      child: CoffeeListScreen(initialPage: initPosition+2),
+                      child: CoffeeListScreen(initialPage: initPosition+3),
                     );
                   }
                 )
               );
+              setState(() {
+                hide = 1;
+              });
             }
           },
           child: Stack(
@@ -56,33 +63,37 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ),
 
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.15,
-                right: 0,
-                left: 0,
-                height: MediaQuery.of(context).size.height * 0.4,
-                child: Hero(
-                  tag: coffeeList[initPosition].name,
-                  child: Image.asset(coffeeList[initPosition].image),
+              AnimatedPositioned(
+                top: hide == 1 ? 170.0 : 130.0,
+                left: 00,
+                right: 00,
+                bottom: 400,
+                duration: Duration(milliseconds: 150),
+                child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 150),
+                  opacity: hide,
+                  child: Image.asset(
+                    coffeeList[initPosition].image,
+                  ),
                 ),
               ),
 
               Positioned(
-                top: MediaQuery.of(context).size.height * 0.32,
-                right: 0,
-                left: 0,
-                bottom: 70,
+                top: 80,
+                left: 40,
+                right: 40,
+                height: MediaQuery.of(context).size.height * 0.80,
                 child: Hero(
                   tag: coffeeList[initPosition+1].name,
-                  child: Image.asset(coffeeList[initPosition+1].image, fit: BoxFit.cover),
+                  child: Image.asset(coffeeList[initPosition+1].image, fit: BoxFit.contain),
                 ),
               ),
 
               Positioned(
-                top: MediaQuery.of(context).size.height * 0.8,
-                right: 0,
+                top: MediaQuery.of(context).size.height * 0.40,
                 left: 0,
-                height: MediaQuery.of(context).size.height,
+                right: 0,
+                bottom: 0,
                 child: Hero(
                   tag: coffeeList[initPosition+2].name,
                   child: Image.asset(coffeeList[initPosition+2].image, fit: BoxFit.cover),
@@ -90,7 +101,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
 
               Positioned(
-                top: MediaQuery.of(context).size.height * 0.52 ,
+                top: MediaQuery.of(context).size.height * 0.80,
+                left: 0,
+                right: 0,
+                height: MediaQuery.of(context).size.height,
+                child: Hero(
+                  tag: coffeeList[initPosition+3].name,
+                  child: Image.asset(coffeeList[initPosition+3].image, fit: BoxFit.cover),
+                ),
+              ),
+
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.60 ,
                 right: 0,
                 left: 0,
                 height: 140,

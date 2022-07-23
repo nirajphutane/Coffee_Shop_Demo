@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CoffeeListScreen extends StatefulWidget {
 
-  double initialPage;
+  final double initialPage;
   CoffeeListScreen({
     required this.initialPage
   });
@@ -19,7 +19,7 @@ class _CoffeeListScreenState extends State<CoffeeListScreen> {
   late PageController coffeeNameController, coffeeImageController;
   late double currentCoffee, currentCoffeeName;
   int milliseconds = 650;
-  
+
   @override
   void initState() {
     currentCoffee = widget.initialPage;
@@ -53,9 +53,7 @@ class _CoffeeListScreenState extends State<CoffeeListScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(
-          color: Colors.brown,
-        ),
+        leading: BackButton(color: Colors.brown),
       ),
       body: Stack(
         children: [
@@ -102,7 +100,7 @@ class _CoffeeListScreenState extends State<CoffeeListScreen> {
                         child: AnimatedSwitcher(
                           duration: Duration(milliseconds: milliseconds),
                           child: Text(
-                            'Rs. ${coffeeList[currentCoffee.toInt()].price}',
+                            '₹ ${coffeeList[currentCoffee.toInt()].price}',
                             style: TextStyle(fontSize: 22),
                             key: Key(coffeeList[currentCoffee.toInt()].name),
                           ),
@@ -155,8 +153,8 @@ class _CoffeeListScreenState extends State<CoffeeListScreen> {
                       transform: Matrix4.identity()
                         ..setEntry(3, 2, 0.001)
                         ..translate(
-                          0.0,
-                          MediaQuery.of(context).size.height / 2.6 * (1 - value).abs()
+                            0.0,
+                            MediaQuery.of(context).size.height / 2.6 * (1 - value).abs()
                         )
                         ..scale(value),
                       child: Opacity(
